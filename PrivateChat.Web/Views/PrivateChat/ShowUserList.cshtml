@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Dal.DbEntities.User>
+
+@{
+    ViewBag.Title = "ShowUserList";
+}
+
+
+
+<h2>User List</h2>
+
+@foreach (var us in Model) {
+
+    <div class="userToChat" data-id="@us.Id"> @us.Name </div>
+}
+
+@section scripts{
+    <script type="text/javascript">
+        $(".userToChat").on("click", function () {
+            debugger;
+            window.location = '@Url.Action("StartChatWith", "PrivateChat")' + "/" + $(this).data("id");
+        });
+
+
+    </script>
+}
+
