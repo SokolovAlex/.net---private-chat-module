@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Enums
+namespace Core.Models
 {
-    public enum UserRole
+    public class BaseModel
     {
-        None,
-        All,
-        Client,
-        Admin
+        public int Id { get; set; }
+
+        public DateTime CreateDate { get; set; }
     }
 }

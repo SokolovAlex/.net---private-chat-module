@@ -1,4 +1,6 @@
-﻿using Dal.Repositories.IRepositories;
+﻿using Core.Enums;
+using Dal.Repositories.IRepositories;
+using PrivateChat.Web.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +18,7 @@ namespace PrivateChat.Web.Controllers
         }
 
         // GET: PrivateChat
+        [Auth(new[] { UserRole.All })]
         public ActionResult ShowUserList()
         {
             var rep = new UserRepository();

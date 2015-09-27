@@ -1,4 +1,5 @@
-﻿using Dal.DbEntities;
+﻿using Core.Models;
+using Dal.DbEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Dal.Repositories.IRepositories
 {
     public interface IUserRepository: IBaseRepository<User>
     {
-        
+        UserModel GetByHash(string hashId);
     }
 }

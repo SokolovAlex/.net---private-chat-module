@@ -13,7 +13,11 @@ namespace Dal.DbEntities
 
         public string Email { get; set; }
 
-        public string Password { get; set; }
+        public string HashId { get; set; }
+
+        public string PasswordHash { get; set; }
+
+        public string Salt { get; set; }
 
         [NotMapped]
         public UserRole UserRole {

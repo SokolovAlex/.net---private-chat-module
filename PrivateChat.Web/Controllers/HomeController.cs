@@ -16,7 +16,7 @@ namespace PrivateChat.Web.Controllers
             ViewBag.Title = "Home Page";
 
 
-            ApplicationUser user = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(User.Identity.GetUserId());
+           // ApplicationUser user = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(User.Identity.GetUserId());
 
             return View();
         }
