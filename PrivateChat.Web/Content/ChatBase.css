@@ -1,0 +1,97 @@
+﻿.messageListContainer {
+    height: 400px;
+    width: 500px;
+    margin-right: 0;
+    margin-left: 0;
+    background-color: #eee;
+    border-color: #ddd;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    overflow-y:scroll; 
+    overflow-x:hidden;
+}
+
+.messageContainer {
+    overflow: hidden;
+    font-size: 18px;
+    margin: 2px;
+    border-radius: 2px;
+}
+
+.messageContainer.newMessage {
+    display: none
+}
+
+.newMessageTextArea {
+    height: 100px;
+    width: 500px;
+    max-width: 500px;
+    margin-top: 10px;
+}
+
+.messageContainer .message {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+
+.messageContainer.notRead .message {
+    background-color: #5bc0de;
+}
+
+.messageContainer.read .message {
+    background-color: #777;
+}
+
+.messageContainer.myMessage .message,
+.messageContainer.hisMessage .messageDate {
+    float: left
+}
+
+.messageContainer.hisMessage .message,
+.messageContainer.hisMessage .messageDate {
+    float: right
+}
+
+.messageContainer .messageDate {
+    display: inline-block;
+    font-size: 8px;
+    margin: auto 5px;
+}
+
+.messageContainer .messageDate .dateLoader {
+    background-image: url("/Content/images/loader.gif");
+    overflow: visible;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 90px;
+    height: 27px;
+}
+
+#chatLoader {
+    position: absolute;
+    top: 0;
+    width: inherit;
+    height: inherit;
+    background-color: #dddddd;
+    opacity: 0.3;
+}
+
+#chatLoader .loaderImage {
+    margin: auto;
+    position: relative;
+    top: 100px;
+    width: 100px;
+    height: 100px;
+    background-image: url("/Content/images/loader2.gif");
+    background-repeat: no-repeat;
+}

@@ -1,0 +1,83 @@
+﻿@using App.BLL.Common.Models.User2UserChat
+@model App.BLL.Common.Models.User2UserChat.ChatViewModel
+
+<h3> Chat with @Model.ToUser.DisplayName</h3>
+<div> Total: @Model.MessagesAmount messages</div>
+<div id="chatContainer">
+    <div class="messageListContainer">
+        @foreach (var mes in Model.Messages)
+        {
+            <div id="message_@mes.ID" class="messageContainer @(mes.IsMine ? "myMessage" : "hisMessage") @(mes.IsRead ? "read" : "notRead")" data-id='@mes.ID'>
+                <div class='message'>
+                    @mes.Text
+                </div>
+                <div class='messageDate'>
+                    @mes.DisplayDate
+                </div>
+            </div>
+        }
+    </div>
+    <textarea class='newMessageTextArea'></textarea>
+</div>
+@section scripts
+{
+
+    <script type="text/template" id="chatLoaderTemplate">
+        <div id="chatLoader">
+            <div class="loaderImage">
+            </div>
+        </div>
+    </script>
+
+
+    <script type="text/template" id="messageTemplate">
+        <div class='messageContainer newMessage <%= isMine ? "myMessage" : "hisMessage" %> <%= isRead ? "read" : "notRead" %>'>
+            <div class='message'>
+                <%= text %>
+            </div>
+            <div class='messageDate'>
+                <% if (!date) {  %> 
+                    <div class="dateLoader"></div> 
+                <% } else { %>
+                    <%= date %>
+                <% } %>
+            </div>
+        </div>
+    </script>
+
+    @Scripts.Render("~/bundles/chat")
+
+    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+    <script type='text/javascript'>
+        var ns = ns || {};
+        ns.urls = ns.urls || {};
+        ns.urls.getMessagesWith = "@Url.Action("GetMessagesWith", "User2UserChat")";
+
+        $(document).ready(function() {
+            var chat = ns.PrivateChat();
+
+            var $el = $("#chatContainer");
+
+            var opt = {
+                authorId: '@(Model.FromUser.HashID)',
+                recipientId: '@(Model.ToUser.HashID)',
+                isAjax: false,
+                template: $('#messageTemplate').html(),
+                elesments: {
+                    textArea: $(".newMessageTextArea", $el),
+                    messagesContainer: $(".messageListContainer", $el)
+                }
+            };
+
+            if (opt.isAjax) {
+                chat.fetchMessages(chat.init);
+            } else {
+                opt.messages = @Html.Raw(Model.MessagesJson);
+                chat.init($el, opt);
+            }
+        });
+    </script>
+
+}

@@ -1,0 +1,28 @@
+﻿
+@model IEnumerable<App.BLL.Common.Models.User.UserModel>
+
+<h3>Select User to chat with</h3>
+<ul>
+    @if (Model != null)
+    {
+        foreach (var recipient in Model)
+        {
+            <li data-id="@recipient.HashID" class="recipient btn btn-default"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> @recipient.DisplayName</li>
+        }
+    }
+</ul>
+@section scripts {
+    <script type="text/javascript">
+        var ns = ns || {};
+        ns.urls = ns.urls || {};
+        ns.urls.startChatUrl = "@Url.Action("StartChatWith", "User2UserChat")";
+
+        $(document).ready(function() {
+            var startChatUrl = ns.urls.startChatUrl;
+            $(".recipient").on("click", function () {
+                var id = $(this).data("id");
+                window.location = startChatUrl + "/" + id;
+            });
+        });
+    </script>
+}
