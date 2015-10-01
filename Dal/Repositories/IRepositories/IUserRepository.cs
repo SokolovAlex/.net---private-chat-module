@@ -1,4 +1,5 @@
 ﻿using Core.Models;
+using Core.Models.User;
 using Dal.DbEntities;
 using System;
 using System.Collections.Generic;

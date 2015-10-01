@@ -10,6 +10,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PrivateChat.Web.Models;
 using PrivateChat.Web.Models.ViewModels;
+using Services.Providers;
+using Core.Models.User;
+using DevOne.Security.Cryptography.BCrypt;
 
 namespace PrivateChat.Web.Controllers
 {
@@ -133,25 +136,23 @@ namespace PrivateChat.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(Register model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                var authService = new AuthServise();
+                var salt = BCryptHelper.GenerateSalt();
+                var passwordHash = BCryptHelper.HashPassword(model.Password, salt);
 
-                    // Дополнительные сведения о том, как включить подтверждение учетной записи и сброс пароля, см. по адресу: http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Отправка сообщения электронной почты с этой ссылкой
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Подтверждение учетной записи", "Подтвердите вашу учетную запись, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
+                var userModel = new UserModel {
+                    Email = model.Email,
+                    Name = model.Email,
+                    CreateDate = DateTime.Now,
+                    Password = passwordHash,
+                    Salt = salt
+                };
 
-                    return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
+                authService.RegisterUser(userModel);
             }
 
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы

@@ -11,5 +11,9 @@ namespace Core.Models
         public int Id { get; set; }
 
         public DateTime CreateDate { get; set; }
+
+        public bool IsNew() {
+            return Id == 0;
+        }
     }
 }

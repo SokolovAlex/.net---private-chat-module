@@ -1,5 +1,5 @@
 ﻿using Core.Enums;
-using Core.Models;
+using Core.Models.User;
 using Services.Providers;
 using System;
 using System.Collections.Generic;
