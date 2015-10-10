@@ -69,17 +69,9 @@
     <Compile Include="DbEntities\Role.cs" />
     <Compile Include="DbEntities\User.cs" />
     <Compile Include="DbEntities\User2Role.cs" />
-    <Compile Include="Migrations\201509201627112_init.cs" />
-    <Compile Include="Migrations\201509201627112_init.Designer.cs">
-      <DependentUpon>201509201627112_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509201720256_add_created_date.cs" />
-    <Compile Include="Migrations\201509201720256_add_created_date.Designer.cs">
-      <DependentUpon>201509201720256_add_created_date.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509270707362_Password+salt.cs" />
-    <Compile Include="Migrations\201509270707362_Password+salt.Designer.cs">
-      <DependentUpon>201509270707362_Password+salt.cs</DependentUpon>
+    <Compile Include="Migrations\201510100950358_init.cs" />
+    <Compile Include="Migrations\201510100950358_init.Designer.cs">
+      <DependentUpon>201510100950358_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\PagingParameters.cs" />
@@ -95,7 +87,9 @@
     <Folder Include="Models\PrivateChat\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -105,14 +99,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201509201627112_init.resx">
-      <DependentUpon>201509201627112_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509201720256_add_created_date.resx">
-      <DependentUpon>201509201720256_add_created_date.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509270707362_Password+salt.resx">
-      <DependentUpon>201509270707362_Password+salt.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510100950358_init.resx">
+      <DependentUpon>201510100950358_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Enums\PrivateChat\MessageStatus.cs" />
     <Compile Include="Enums\Roles.cs" />
+    <Compile Include="Models\AppResult.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\User\UserModel.cs" />
     <Compile Include="Models\User\UserSessionModel.cs" />

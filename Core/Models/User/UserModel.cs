@@ -18,6 +18,8 @@ namespace Core.Models.User
 
         public string Salt { get; set; }
 
+        public Guid HashId { get; set; }
+
         public UserRole UserRole
         {
             get

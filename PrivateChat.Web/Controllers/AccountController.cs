@@ -13,6 +13,7 @@ using PrivateChat.Web.Models.ViewModels;
 using Services.Providers;
 using Core.Models.User;
 using DevOne.Security.Cryptography.BCrypt;
+using Dal.Repositories.IRepositories;
 
 namespace PrivateChat.Web.Controllers
 {
@@ -77,7 +78,22 @@ namespace PrivateChat.Web.Controllers
                 return View(model);
             }
 
-            return RedirectToLocal(returnUrl);
+            var rep = new UserRepository();
+
+            var user = rep.GetByEmail(model.Email);
+
+            var authService = new AuthServise();
+
+            var chechResult = authService.VerifyUser(user, model.Password);
+
+            if (chechResult.Success)
+            {
+                authService.Login(user);
+                returnUrl = String.IsNullOrWhiteSpace(returnUrl) ? "Home" : returnUrl;
+                return Redirect(returnUrl);
+            }
+
+            return View(model);
         }
 
         //
@@ -140,19 +156,25 @@ namespace PrivateChat.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userRepository = new UserRepository();
+
+                var user = userRepository.GetByEmail(model.Email);
+
+                if (user != null ) {
+                    RedirectToAction("Register");
+                }
+
                 var authService = new AuthServise();
-                var salt = BCryptHelper.GenerateSalt();
-                var passwordHash = BCryptHelper.HashPassword(model.Password, salt);
 
                 var userModel = new UserModel {
                     Email = model.Email,
                     Name = model.Email,
-                    CreateDate = DateTime.Now,
-                    Password = passwordHash,
-                    Salt = salt
+                    CreateDate = DateTime.Now
                 };
 
-                authService.RegisterUser(userModel);
+                authService.RegisterUser(userModel, model.Password);
+
+                RedirectToAction("Login");
             }
 
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы

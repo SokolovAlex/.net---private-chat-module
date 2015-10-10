@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "CurrentUser";
+}
+
+@if (CurrentUser.IsLoggedIn && CurrentUser.Info != null)
+{
+    <li><a href="#">Hi @CurrentUser.Info.UserModel.Name (@CurrentUser.Info.UserModel.Email) </a> </li>
+}
+
+
+

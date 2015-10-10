@@ -210,3 +210,7 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+*.txt
+PrivateChat.Web/_bin_deployableAssemblies/amd64/Microsoft.VC90.CRT/msvcr90.dll
+*.dll
+PrivateChat.Web/_bin_deployableAssemblies/amd64/Microsoft.VC90.CRT/Microsoft.VC90.CRT.manifest

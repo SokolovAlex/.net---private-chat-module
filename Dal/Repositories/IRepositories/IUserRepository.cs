@@ -11,6 +11,8 @@ namespace Dal.Repositories.IRepositories
 {
     public interface IUserRepository: IBaseRepository<User>
     {
-        UserModel GetByHash(string hashId);
+        UserModel GetByHash(Guid hashId);
+
+        UserModel GetByEmail(string mail);
     }
 }

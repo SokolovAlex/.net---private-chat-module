@@ -1,5 +1,6 @@
 ﻿using Core.Enums;
 using Core.Models.User;
+using Dal.Repositories.IRepositories;
 using Services.Providers;
 using System;
 using System.Collections.Generic;
@@ -25,12 +26,24 @@ namespace PrivateChat.Web.Filters
 
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            var userIdentity = filterContext.RequestContext.HttpContext.User;
             var coockie = filterContext.HttpContext.Request.Cookies.Get(CoockieKey);
 
             UserModel user = null;
-            if (coockie != null) {
-                user = authService.VerifyHash(coockie.Value, UserRoles);
+            if (coockie != null)
+            {
+                //user = authService.VerifyUser(coockie.Value, UserRoles);
+                if (CurrentUser.Info == null)
+                {
+                    var rep = new UserRepository();
+                    Guid guid;
+                    var check = Guid.TryParse(coockie.Value, out guid);
+                    if (check) {
+                        user = rep.GetByHash(guid);
+                    }
+                }
+                else {
+                    user = CurrentUser.Info.UserModel;
+                }
             }
 
             if (user == null)
@@ -39,9 +52,9 @@ namespace PrivateChat.Web.Filters
                     RouteValueDictionary(new { controller = "Account", action = "Login", returnUrl = filterContext.HttpContext.Request.Url }));
                 //base.HandleUnauthorizedRequest(filterContext);
             }
-            else {
-                base.OnAuthorization(filterContext);
-            }
+            //else {
+            //    base.OnAuthorization(filterContext);
+            //}
 
         }
     }

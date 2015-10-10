@@ -25,7 +25,6 @@ namespace PrivateChat.Web.Controllers
             var user = rep.GetAll().FirstOrDefault();
             var users = rep.GetAll().Where(x=>x.Id != user.Id);
 
-
             return View(users);
         }
 
