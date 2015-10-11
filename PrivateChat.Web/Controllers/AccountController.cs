@@ -14,6 +14,7 @@ using Services.Providers;
 using Core.Models.User;
 using DevOne.Security.Cryptography.BCrypt;
 using Dal.Repositories.IRepositories;
+using Dal.Repositories.Repositories;
 
 namespace PrivateChat.Web.Controllers
 {

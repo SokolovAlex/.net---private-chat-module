@@ -1,6 +1,7 @@
 ﻿using Core.Enums;
 using Core.Models.User;
 using Dal.Repositories.IRepositories;
+using Dal.Repositories.Repositories;
 using Services.Providers;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,14 @@ namespace PrivateChat.Web.Filters
 
         private AuthServise authService { get; set; }
 
-        public Auth(UserRole[] roles) {
+        public Auth(UserRole[] roles ) {
             UserRoles = roles;
+            authService = new AuthServise();
+        }
+
+        public Auth()
+        {
+            UserRoles = new[] { UserRole.All };
             authService = new AuthServise();
         }
 

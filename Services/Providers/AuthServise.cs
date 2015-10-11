@@ -2,6 +2,7 @@
 using Core.Models;
 using Core.Models.User;
 using Dal.Repositories.IRepositories;
+using Dal.Repositories.Repositories;
 using DevOne.Security.Cryptography.BCrypt;
 using Services.Providers.IProviders;
 using System;

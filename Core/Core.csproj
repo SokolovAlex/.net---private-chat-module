@@ -34,6 +34,10 @@
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,6 +52,9 @@
     <Compile Include="Enums\Roles.cs" />
     <Compile Include="Models\AppResult.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\PagingInfo.cs" />
+    <Compile Include="Models\PrivateChat\MessageModel.cs" />
+    <Compile Include="Models\PrivateChat\PrivateChatRoom.cs" />
     <Compile Include="Models\User\UserModel.cs" />
     <Compile Include="Models\User\UserSessionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

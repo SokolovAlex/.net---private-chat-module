@@ -1,26 +1,22 @@
-﻿@model IEnumerable<Dal.DbEntities.User>
+﻿@model IEnumerable<Core.Models.User.UserModel>
 
 @{
     ViewBag.Title = "ShowUserList";
 }
+<h2>Chat with</h2>
 
-
-
-<h2>User List</h2>
-
-@foreach (var us in Model) {
-
-    <div class="userToChat" data-id="@us.Id"> @us.Name </div>
+@foreach (var us in Model)
+{
+    <button class="btn btn-default userToChat" data-id="@us.Id" type="submit">
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>@us.Name
+    </button>
 }
 
 @section scripts{
     <script type="text/javascript">
         $(".userToChat").on("click", function () {
-            debugger;
             window.location = '@Url.Action("StartChatWith", "PrivateChat")' + "/" + $(this).data("id");
         });
-
-
     </script>
 }
 

@@ -3,6 +3,7 @@ using Core.Enums;
 using Core.Models;
 using Core.Models.User;
 using Dal.DbEntities;
+using Dal.Repositories.IRepositories;
 using Ssibir.DAL.Repositories;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dal.Repositories.IRepositories
+namespace Dal.Repositories.Repositories
 {
-    public class UserRepository: BaseRepository<User>, IUserRepository
+    public partial class UserRepository: BaseRepository<User>, IUserRepository
     {
         public UserRepository() {
             Mapper.CreateMap<User, UserModel>().

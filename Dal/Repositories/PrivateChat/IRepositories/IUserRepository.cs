@@ -1,4 +1,5 @@
 ﻿using Core.Models;
+using Core.Models.PrivateChat;
 using Core.Models.User;
 using Dal.DbEntities;
 using System;
@@ -11,8 +12,8 @@ namespace Dal.Repositories.IRepositories
 {
     public partial interface IUserRepository: IBaseRepository<User>
     {
-        UserModel GetByHash(Guid hashId);
+        IEnumerable<UserModel> GetAllRecipientsFor(int id);
 
-        UserModel GetByEmail(string mail);
+        PrivateChatRoom GetChatUsersByHashes(Guid senderHash, Guid recipientHash);
     }
 }
