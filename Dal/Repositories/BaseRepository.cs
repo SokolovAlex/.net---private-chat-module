@@ -11,7 +11,7 @@ using Dal.Repositories.IRepositories;
 using Dal.DbEntities;
 using Dal.Context;
 
-namespace Ssibir.DAL.Repositories
+namespace Dal.Repositories
 {
     public abstract class BaseRepository<T> : IBaseRepository<T>
         where T : BaseEntity

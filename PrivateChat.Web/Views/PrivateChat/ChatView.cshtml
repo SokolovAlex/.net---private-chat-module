@@ -1,34 +1,33 @@
-﻿@using App.BLL.Common.Models.User2UserChat
-@model App.BLL.Common.Models.User2UserChat.ChatViewModel
+﻿@model Core.Models.PrivateChat.PrivateChatRoom
 
-<h3> Chat with @Model.ToUser.DisplayName</h3>
+<h3> Chat with @Model.Recipient.Name</h3>
 <div> Total: @Model.MessagesAmount messages</div>
 <div id="chatContainer">
     <div class="messageListContainer">
         @foreach (var mes in Model.Messages)
         {
-            <div id="message_@mes.ID" class="messageContainer @(mes.IsMine ? "myMessage" : "hisMessage") @(mes.IsRead ? "read" : "notRead")" data-id='@mes.ID'>
+            <div id="message_@mes.Id" class="messageContainer @(mes.IsMine ? "myMessage" : "hisMessage") @(mes.IsRead ? "read" : "notRead")" data-id='@mes.Id'>
                 <div class='message'>
                     @mes.Text
                 </div>
                 <div class='messageDate'>
-                    @mes.DisplayDate
+                    @mes.DisplayCreateDate
                 </div>
             </div>
         }
     </div>
     <textarea class='newMessageTextArea'></textarea>
 </div>
+
+
 @section scripts
 {
-
     <script type="text/template" id="chatLoaderTemplate">
         <div id="chatLoader">
             <div class="loaderImage">
             </div>
         </div>
     </script>
-
 
     <script type="text/template" id="messageTemplate">
         <div class='messageContainer newMessage <%= isMine ? "myMessage" : "hisMessage" %> <%= isRead ? "read" : "notRead" %>'>
@@ -61,8 +60,8 @@
             var $el = $("#chatContainer");
 
             var opt = {
-                authorId: '@(Model.FromUser.HashID)',
-                recipientId: '@(Model.ToUser.HashID)',
+                authorId: '@(Model.Author.HashId)',
+                recipientId: '@(Model.Recipient.HashId)',
                 isAjax: false,
                 template: $('#messageTemplate').html(),
                 elesments: {

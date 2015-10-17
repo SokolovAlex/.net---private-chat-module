@@ -3,7 +3,6 @@ using Core.Models.PrivateChat;
 using Core.Models.User;
 using Dal.DbEntities;
 using Dal.Repositories.IRepositories;
-using Ssibir.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

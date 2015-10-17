@@ -29,6 +29,8 @@ namespace Dal.DbEntities.PrivateChat
 
         public int RecipientId { get; set; }
 
+        public DateTime? ReadDate { get; set; }
+
         public virtual User Recipient { get; set; }
     }
 }

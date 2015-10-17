@@ -72,7 +72,7 @@ namespace PrivateChat.Web.Controllers
 
             return new JsonResult
             {
-                Data = model.MessagesToJsonObject(),
+                Data = model.MessagesJson,
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }

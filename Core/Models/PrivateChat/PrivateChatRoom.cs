@@ -17,10 +17,17 @@ namespace Core.Models.PrivateChat
 
         public IEnumerable<MessageModel> Messages { get; set; }
 
+        public string MessagesJson {
+            get {
+                return MessagesToJsonObject();
+            }
+        }
+
         public string MessagesToJsonObject() {
             return Newtonsoft.Json.JsonConvert.SerializeObject(Messages.Select(x => new
             {
                 text = x.Text,
+                date = x.DisplayCreateDate,
                 isMine = x.IsMine,
                 isREad = x.IsRead
             }));

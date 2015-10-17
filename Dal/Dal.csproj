@@ -81,6 +81,14 @@
     <Compile Include="Migrations\201509270707362_Password+salt.Designer.cs">
       <DependentUpon>201509270707362_Password+salt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510121627441_add_readDate.cs" />
+    <Compile Include="Migrations\201510121627441_add_readDate.Designer.cs">
+      <DependentUpon>201510121627441_add_readDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510121631066_add_readDate2.cs" />
+    <Compile Include="Migrations\201510121631066_add_readDate2.Designer.cs">
+      <DependentUpon>201510121631066_add_readDate2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\PagingParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -115,6 +123,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509270707362_Password+salt.resx">
       <DependentUpon>201509270707362_Password+salt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510121627441_add_readDate.resx">
+      <DependentUpon>201510121627441_add_readDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510121631066_add_readDate2.resx">
+      <DependentUpon>201510121631066_add_readDate2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

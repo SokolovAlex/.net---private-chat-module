@@ -7,8 +7,9 @@
 
 @foreach (var us in Model)
 {
-    <button class="btn btn-default userToChat" data-id="@us.Id" type="submit">
-        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>@us.Name
+    <button class="btn btn-default userToChat" data-id="@us.HashId" type="submit">
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+        @us.Name
     </button>
 }
 
