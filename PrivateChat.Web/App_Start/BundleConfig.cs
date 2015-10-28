@@ -28,6 +28,7 @@ namespace PrivateChat.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/ChatBase.css",
                       "~/Content/site.css"));
         }
     }
