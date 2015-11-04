@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dal.Context
+namespace Core.Enums
 {
-    class CommonContext
+    public enum Settings
     {
+        ChatPageSize = 1
     }
 }

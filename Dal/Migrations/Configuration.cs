@@ -39,6 +39,16 @@ namespace Dal.Migrations
               }
             );
             context.SaveChanges();
+
+            context.Settings.AddOrUpdate(
+            new Settings
+            {
+                Id = 1,
+                Key = "ChatPageSize",
+                Value = "20",
+                CreateDate = DateTime.Now,
+            });
+            context.SaveChanges();
         }
     }
 }

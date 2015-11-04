@@ -17,10 +17,7 @@ namespace Dal.Context
 
         public DbSet<Role> Roles { get; set; }
 
-      //  public DbSet<Category> Categories { get; set; }
-
-        //public DbSet<User> User2Role { get; set; }
-
+        public DbSet<Settings> Settings { get; set; }
 
         public DbSet<Message> Messages { get; set; }
 

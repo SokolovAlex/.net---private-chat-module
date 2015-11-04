@@ -50,11 +50,13 @@
   <ItemGroup>
     <Compile Include="Enums\PrivateChat\MessageStatus.cs" />
     <Compile Include="Enums\Roles.cs" />
+    <Compile Include="Enums\Settings.cs" />
     <Compile Include="Models\AppResult.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\PrivateChat\MessageModel.cs" />
     <Compile Include="Models\PrivateChat\PrivateChatRoom.cs" />
+    <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="Models\User\UserModel.cs" />
     <Compile Include="Models\User\UserSessionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

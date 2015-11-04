@@ -61,12 +61,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\CommonContext.cs" />
     <Compile Include="Context\PrivatChatContext.cs" />
     <Compile Include="DbEntities\BaseEntity.cs" />
     <Compile Include="DbEntities\PrivateChat\Message.cs" />
     <Compile Include="DbEntities\PrivateChat\User.cs" />
     <Compile Include="DbEntities\Role.cs" />
+    <Compile Include="DbEntities\Settings.cs" />
     <Compile Include="DbEntities\User.cs" />
     <Compile Include="DbEntities\User2Role.cs" />
     <Compile Include="Migrations\201509201627112_init.cs" />
@@ -89,16 +89,22 @@
     <Compile Include="Migrations\201510121631066_add_readDate2.Designer.cs">
       <DependentUpon>201510121631066_add_readDate2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511041156134_settings.cs" />
+    <Compile Include="Migrations\201511041156134_settings.Designer.cs">
+      <DependentUpon>201511041156134_settings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\PagingParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\IRepositories\IBaseRepository.cs" />
     <Compile Include="Repositories\IRepositories\IUserRepository.cs" />
+    <Compile Include="Repositories\IRepositories\ISettingsRepository.cs" />
     <Compile Include="Repositories\PrivateChat\IRepositories\IMessageRepository.cs" />
     <Compile Include="Repositories\PrivateChat\IRepositories\IUserRepository.cs" />
     <Compile Include="Repositories\PrivateChat\MessageRepository.cs" />
     <Compile Include="Repositories\PrivateChat\UserRepository.cs" />
+    <Compile Include="Repositories\SettingsRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup />
@@ -129,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510121631066_add_readDate2.resx">
       <DependentUpon>201510121631066_add_readDate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511041156134_settings.resx">
+      <DependentUpon>201511041156134_settings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

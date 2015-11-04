@@ -1,4 +1,5 @@
-﻿using Core.Enums;
+﻿using Bll.Providers;
+using Core.Enums;
 using Core.Models;
 using Core.Models.PrivateChat;
 using Dal.Repositories.IRepositories;
@@ -39,6 +40,7 @@ namespace PrivateChat.Web.Controllers
             var rep = new UserRepository();
             var currentUser = CurrentUser.Info.UserModel;
             var recipient = rep.GetByHash(id);
+            var pageSize = Int32.Parse(SettingsProvider.Instance.Settings[Settings.ChatPageSize].Value);
 
             var model = new PrivateChatRoom
             {
@@ -48,25 +50,26 @@ namespace PrivateChat.Web.Controllers
                 Messages = messageRep.GetMessagesBetweenUsers(currentUser.Id, recipient.Id, new PagingInfo
                 {
                     CurrentPage = 0,
-                    ItemsPerPage = 20
+                    ItemsPerPage = pageSize
                 })
             };
             return View("ChatView", model);
         }
 
-        public ActionResult GetMessagesWith(Guid id, int page = 1, int itemPerPage = 20)
+        public ActionResult GetMessagesWith(Guid id, int page = 1, int itemPerPage = 0)
         {
             var messageRep = new MessageRepository();
             var rep = new UserRepository();
             var currentUser = CurrentUser.Info.UserModel;
             var recipient = rep.GetByHash(id);
+            var defaultPageSize = Int32.Parse(SettingsProvider.Instance.Settings[Settings.ChatPageSize].Value);
 
             var model = new PrivateChatRoom
             {
                 Messages = messageRep.GetMessagesBetweenUsers(currentUser.Id, recipient.Id, new PagingInfo
                 {
                     CurrentPage = page,
-                    ItemsPerPage = itemPerPage,
+                    ItemsPerPage = itemPerPage == 0 ? defaultPageSize : itemPerPage,
                 })
             };
 
