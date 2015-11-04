@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PrivateChat.Web.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,8 @@ namespace PrivateChat.Web
     {
         protected void Application_Start()
         {
+            IoCConfig.ConfigureContainer();
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

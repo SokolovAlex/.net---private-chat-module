@@ -1,4 +1,5 @@
-﻿using Bll.Providers;
+﻿using Autofac;
+using Bll.Providers;
 using Core.Enums;
 using Core.Models;
 using Core.Models.PrivateChat;
@@ -26,7 +27,10 @@ namespace PrivateChat.Web.Controllers
         [Auth]
         public ActionResult ShowUserList()
         {
-            var rep = new UserRepository();
+            var builder = new ContainerBuilder();
+            var container = builder.Build();
+            var rep = container.Resolve<IUserRepository>();
+
             var curretId = CurrentUser.Info.UserModel.Id;
             var users = rep.GetAllRecipientsFor(curretId);
             return View(users);
