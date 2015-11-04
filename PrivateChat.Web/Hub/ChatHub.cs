@@ -17,10 +17,12 @@ namespace PrivateChat.Web.Hubs
     [HubName("chatHub")]
     public class ChatHub : Hub //: PersistentConnection 
     {
-        private IDictionary<Guid, List<ConnectionInfo>> Connections { get; set; }
+        private static IDictionary<Guid, List<ConnectionInfo>> Connections { get; set; }
 
         public ChatHub() {
-            Connections = new Dictionary<Guid, List<ConnectionInfo>>();
+            if (Connections == null) {
+                Connections = new Dictionary<Guid, List<ConnectionInfo>>();
+            }
         }
 
         public void Register(Guid userId, Guid opponentId)
@@ -76,8 +78,19 @@ namespace PrivateChat.Web.Hubs
 
             var msg =  messageRepository.CreateMessage(users.Author.Id, users.Recipient.Id, text);
 
+            if (!Connections.ContainsKey(authorId)) {
+                return;
+            }
+
             var connections = Connections[authorId].Select(x=>x.Connection).ToList();
             Clients.Clients(connections).MessageSaved(clientMessageId, msg.DisplayCreateDate, text);
+            
+            if (!Connections.ContainsKey(recipientId))
+            {
+                return;
+            }
+            var readerConnections = Connections[recipientId].Select(x => x.Connection).ToList();
+            Clients.Clients(readerConnections).ReceiveMessage(text, false, msg.DisplayCreateDate, clientMessageId);
         }
 
         public void ReadMessages(Guid authorId, Guid recipientId)
@@ -87,6 +100,10 @@ namespace PrivateChat.Web.Hubs
             var users = userRepository.GetChatUsersByHashes(authorId, recipientId);
 
             var msgs = messageRepository.MarkAsRead(users.Author.Id, users.Recipient.Id);
+
+            if (!Connections.ContainsKey(recipientId)) {
+                return; 
+            }
 
             var connections = Connections[recipientId].Where(x=>x.With == authorId).Select(x=>x.Connection).ToList();
 

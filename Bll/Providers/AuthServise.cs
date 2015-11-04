@@ -66,7 +66,7 @@ namespace Services.Providers
 
         public void SaveToCookie()
         {
-            if (CurrentUser.Info == null || CurrentUser.Info.UserModel.HashId != null) {
+            if (CurrentUser.Info == null || CurrentUser.Info.UserModel.HashId == null) {
                 return;
             }
 

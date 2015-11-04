@@ -46,6 +46,9 @@ namespace PrivateChat.Web.Filters
                     var check = Guid.TryParse(coockie.Value, out guid);
                     if (check) {
                         user = rep.GetByHash(guid);
+                        CurrentUser.Info = new UserSessionModel {
+                            UserModel = user
+                        };
                     }
                 }
                 else {

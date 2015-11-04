@@ -72,8 +72,7 @@ ns.PrivateChat = function() {
                     hub.server.saveMessage(messageText, authorId, recipientId, clientMessageId);
                 } else {
                     chatStorage.save(messageText, clientMessageId);
-                    // if connections saved on server not in cache (redis etc.) you may resend messeges without reloading page
-                    //chatStorage.startChecking(sendStorageMessages); 
+                    chatStorage.startChecking(sendStorageMessages); 
                 }
 
                 var model = addMessage(messageText, true);
@@ -88,7 +87,6 @@ ns.PrivateChat = function() {
         hub = $.connection.chatHub;
 
         hub.client.receiveMessage = function(text, isMine, date, clientId) {
-            console.log("receiveMessage!", clientId);
             addMessage(text, isMine, date);
             readMessages();
         };
