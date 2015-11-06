@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
       <Private>True</Private>
@@ -50,7 +53,12 @@
   <ItemGroup>
     <Compile Include="Enums\PrivateChat\MessageStatus.cs" />
     <Compile Include="Enums\Roles.cs" />
+<<<<<<< 3b119099d6df859114aba1610731db7ac8cf33b4
     <Compile Include="Enums\Settings.cs" />
+=======
+    <Compile Include="IoC.cs" />
+    <Compile Include="IoCModule.cs" />
+>>>>>>> IoC singleton
     <Compile Include="Models\AppResult.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
