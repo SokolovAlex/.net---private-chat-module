@@ -31,7 +31,7 @@ namespace Dal.Repositories.Repositories
         public UserModel GetByHash(Guid hashId)
         {
             return Mapper.Map<UserModel>(
-                GetTable().FirstOrDefault(x=>x.HashId == hashId));
+                GetTable().FirstOrDefault(x => x.Hash == hashId));
         }
 
         public UserModel GetByEmail(string mail)

@@ -44,7 +44,7 @@ namespace Services.Providers
                 return new AppResult
                 {
                     isError = true,
-                    Message = "Password incorrectn"
+                    Message = "Password incorrect"
                 };
             }
 
@@ -53,15 +53,6 @@ namespace Services.Providers
                 isError = false,
                 Message = "Password correct"
             };
-
-            //if (roles.Contains(UserRole.All) || roles.Contains(user.UserRole))
-            //{
-            //    return user;
-            //}
-            //else {
-            //    return null;
-            //    //throw permissionException();
-            //}
         }
 
         public void SaveToCookie()

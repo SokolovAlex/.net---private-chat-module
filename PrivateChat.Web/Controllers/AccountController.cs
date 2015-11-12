@@ -5,6 +5,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Autofac;
+using Core.Components;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -79,7 +81,7 @@ namespace PrivateChat.Web.Controllers
                 return View(model);
             }
 
-            var rep = new UserRepository();
+            var rep = IoC.Instance.Resolve<IUserRepository>();
 
             var user = rep.GetByEmail(model.Email);
 

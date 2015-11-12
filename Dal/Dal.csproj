@@ -11,6 +11,8 @@
     <AssemblyName>Dal</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,9 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+    <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="AutoMapper, Version=4.0.4.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.4.0.4\lib\net45\AutoMapper.dll</HintPath>
@@ -69,29 +70,10 @@
     <Compile Include="DbEntities\Settings.cs" />
     <Compile Include="DbEntities\User.cs" />
     <Compile Include="DbEntities\User2Role.cs" />
-    <Compile Include="Migrations\201509201627112_init.cs" />
-    <Compile Include="Migrations\201509201627112_init.Designer.cs">
-      <DependentUpon>201509201627112_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509201720256_add_created_date.cs" />
-    <Compile Include="Migrations\201509201720256_add_created_date.Designer.cs">
-      <DependentUpon>201509201720256_add_created_date.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509270707362_Password+salt.cs" />
-    <Compile Include="Migrations\201509270707362_Password+salt.Designer.cs">
-      <DependentUpon>201509270707362_Password+salt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510121627441_add_readDate.cs" />
-    <Compile Include="Migrations\201510121627441_add_readDate.Designer.cs">
-      <DependentUpon>201510121627441_add_readDate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510121631066_add_readDate2.cs" />
-    <Compile Include="Migrations\201510121631066_add_readDate2.Designer.cs">
-      <DependentUpon>201510121631066_add_readDate2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511041156134_settings.cs" />
-    <Compile Include="Migrations\201511041156134_settings.Designer.cs">
-      <DependentUpon>201511041156134_settings.cs</DependentUpon>
+    <Compile Include="Dal_IoCModule.cs" />
+    <Compile Include="Migrations\201511121219261_start.cs" />
+    <Compile Include="Migrations\201511121219261_start.Designer.cs">
+      <DependentUpon>201511121219261_start.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\PagingParameters.cs" />
@@ -107,7 +89,11 @@
     <Compile Include="Repositories\SettingsRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201511121219261_start.resx">
+      <DependentUpon>201511121219261_start.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
@@ -120,27 +106,14 @@
       <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201509201627112_init.resx">
-      <DependentUpon>201509201627112_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509201720256_add_created_date.resx">
-      <DependentUpon>201509201720256_add_created_date.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509270707362_Password+salt.resx">
-      <DependentUpon>201509270707362_Password+salt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510121627441_add_readDate.resx">
-      <DependentUpon>201510121627441_add_readDate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510121631066_add_readDate2.resx">
-      <DependentUpon>201510121631066_add_readDate2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511041156134_settings.resx">
-      <DependentUpon>201511041156134_settings.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

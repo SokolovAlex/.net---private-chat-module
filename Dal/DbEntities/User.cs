@@ -14,7 +14,7 @@ namespace Dal.DbEntities
 
         public string Email { get; set; }
 
-        public Guid HashId { get; set; }
+        public Guid Hash { get; set; }
 
         public string PasswordHash { get; set; }
 

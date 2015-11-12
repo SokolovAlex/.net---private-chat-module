@@ -2,20 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.Helpers;
-
 using Autofac;
-using Microsoft.AspNet.SignalR;
+using Core.Components;
+using Dal.Repositories.IRepositories;
 using Microsoft.AspNet.SignalR.Hubs;
-using Newtonsoft.Json;
-using Dal.Repositories.Repositories;
-using Dal.Repositories.PrivatChat;
 
-namespace PrivateChat.Web.Hubs
+namespace PrivateChat.Web.Hub
 {
     [HubName("chatHub")]
-    public class ChatHub : Hub //: PersistentConnection 
+    public class ChatHub : Microsoft.AspNet.SignalR.Hub //: PersistentConnection 
     {
         private static IDictionary<Guid, List<ConnectionInfo>> Connections { get; set; }
 
@@ -32,11 +27,7 @@ namespace PrivateChat.Web.Hubs
             if (Connections.ContainsKey(userId))
             {
                 var userCons = Connections[userId];
-                if (userCons == null)
-                {
-                    userCons = new List<ConnectionInfo> { conInfo };
-                }
-                else
+                if (userCons != null)
                 {
                     userCons.Add(conInfo);
                 }
@@ -71,8 +62,8 @@ namespace PrivateChat.Web.Hubs
 
         public void SaveMessage(string text, Guid authorId, Guid recipientId, string clientMessageId)
         {
-            var userRepository = new UserRepository();
-            var messageRepository = new MessageRepository();
+            var messageRepository = IoC.Instance.Resolve<IMessageRepository>();
+            var userRepository = IoC.Instance.Resolve<IUserRepository>();
 
             var users = userRepository.GetChatUsersByHashes(authorId, recipientId);
 
@@ -95,8 +86,8 @@ namespace PrivateChat.Web.Hubs
 
         public void ReadMessages(Guid authorId, Guid recipientId)
         {
-            var userRepository = new UserRepository();
-            var messageRepository = new MessageRepository();
+            var messageRepository = IoC.Instance.Resolve<IMessageRepository>();
+            var userRepository = IoC.Instance.Resolve<IUserRepository>();
             var users = userRepository.GetChatUsersByHashes(authorId, recipientId);
 
             var msgs = messageRepository.MarkAsRead(users.Author.Id, users.Recipient.Id);

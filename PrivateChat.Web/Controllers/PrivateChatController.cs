@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Core.Components;
 
 namespace PrivateChat.Web.Controllers
 {
@@ -27,9 +28,7 @@ namespace PrivateChat.Web.Controllers
         [Auth]
         public ActionResult ShowUserList()
         {
-            var builder = new ContainerBuilder();
-            var container = builder.Build();
-            var rep = container.Resolve<IUserRepository>();
+            var rep = IoC.Instance.Resolve<IUserRepository>();
 
             var curretId = CurrentUser.Info.UserModel.Id;
             var users = rep.GetAllRecipientsFor(curretId);
@@ -40,8 +39,9 @@ namespace PrivateChat.Web.Controllers
         [Auth]
         public ActionResult StartChatWith(Guid id)
         {
-            var messageRep = new MessageRepository();
-            var rep = new UserRepository();
+            var messageRep = IoC.Instance.Resolve<IMessageRepository>();
+            var rep = IoC.Instance.Resolve<IUserRepository>();
+
             var currentUser = CurrentUser.Info.UserModel;
             var recipient = rep.GetByHash(id);
             var pageSize = Int32.Parse(SettingsProvider.Instance.Settings[Settings.ChatPageSize].Value);
@@ -62,8 +62,8 @@ namespace PrivateChat.Web.Controllers
 
         public ActionResult GetMessagesWith(Guid id, int page = 1, int itemPerPage = 0)
         {
-            var messageRep = new MessageRepository();
-            var rep = new UserRepository();
+            var messageRep = IoC.Instance.Resolve<IMessageRepository>();
+            var rep = IoC.Instance.Resolve<IUserRepository>();
             var currentUser = CurrentUser.Info.UserModel;
             var recipient = rep.GetByHash(id);
             var defaultPageSize = Int32.Parse(SettingsProvider.Instance.Settings[Settings.ChatPageSize].Value);

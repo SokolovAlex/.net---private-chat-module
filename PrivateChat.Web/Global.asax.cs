@@ -1,4 +1,5 @@
-﻿using PrivateChat.Web.App_Start;
+﻿using Core.Components;
+using PrivateChat.Web.App_Start;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace PrivateChat.Web
         protected void Application_Start()
         {
             IoCConfig.ConfigureContainer();
+
+            IoC.Initialize(new Web_IoCModule());
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);

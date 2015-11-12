@@ -3,7 +3,7 @@ namespace Dal.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init : DbMigration
+    public partial class start : DbMigration
     {
         public override void Up()
         {
@@ -13,9 +13,11 @@ namespace Dal.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Text = c.String(),
-                        Status = c.Int(nullable: false),
+                        StatusId = c.Int(nullable: false),
                         AuthorId = c.Int(nullable: false),
                         RecipientId = c.Int(nullable: false),
+                        ReadDate = c.DateTime(),
+                        CreateDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Users", t => t.AuthorId)
@@ -29,9 +31,12 @@ namespace Dal.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
-                        Login = c.String(),
-                        Password = c.String(),
+                        Email = c.String(),
+                        Hash = c.Guid(nullable: false),
+                        PasswordHash = c.String(),
+                        Salt = c.String(),
                         RoleId = c.Int(nullable: false),
+                        CreateDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Roles", t => t.RoleId)
@@ -43,6 +48,18 @@ namespace Dal.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
+                        CreateDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Settings",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Value = c.String(),
+                        Key = c.String(),
+                        CreateDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -56,6 +73,7 @@ namespace Dal.Migrations
             DropIndex("dbo.Users", new[] { "RoleId" });
             DropIndex("dbo.Messages", new[] { "RecipientId" });
             DropIndex("dbo.Messages", new[] { "AuthorId" });
+            DropTable("dbo.Settings");
             DropTable("dbo.Roles");
             DropTable("dbo.Users");
             DropTable("dbo.Messages");

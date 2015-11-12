@@ -9,10 +9,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Autofac;
+using Core.Components;
 
 namespace PrivateChat.Web.Filters
 {
-    public class Auth : System.Web.Mvc.AuthorizeAttribute
+    public class Auth : AuthorizeAttribute
     {
         private const string CoockieKey = "ApplicationUser";
 
@@ -41,7 +43,7 @@ namespace PrivateChat.Web.Filters
                 //user = authService.VerifyUser(coockie.Value, UserRoles);
                 if (CurrentUser.Info == null)
                 {
-                    var rep = new UserRepository();
+                    var rep = IoC.Instance.Resolve<IUserRepository>();
                     Guid guid;
                     var check = Guid.TryParse(coockie.Value, out guid);
                     if (check) {
@@ -60,12 +62,7 @@ namespace PrivateChat.Web.Filters
             {
                 filterContext.Result = new RedirectToRouteResult(new
                     RouteValueDictionary(new { controller = "Account", action = "Login", returnUrl = filterContext.HttpContext.Request.Url }));
-                //base.HandleUnauthorizedRequest(filterContext);
             }
-            //else {
-            //    base.OnAuthorization(filterContext);
-            //}
-
         }
     }
 }

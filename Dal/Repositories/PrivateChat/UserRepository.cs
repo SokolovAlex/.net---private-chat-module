@@ -22,9 +22,9 @@ namespace Dal.Repositories.Repositories
 
         public PrivateChatRoom GetChatUsersByHashes(Guid senderHash, Guid recipientHash)
         {
-            var users = GetTable().Where(x => x.HashId == senderHash || x.HashId == recipientHash).ToList();
-            var sender = users.FirstOrDefault(x => x.HashId == senderHash);
-            var recipient = users.FirstOrDefault(x => x.HashId == recipientHash);
+            var users = GetTable().Where(x => x.Hash == senderHash || x.Hash == recipientHash).ToList();
+            var sender = users.FirstOrDefault(x => x.Hash == senderHash);
+            var recipient = users.FirstOrDefault(x => x.Hash == recipientHash);
 
             var result = new PrivateChatRoom();
 

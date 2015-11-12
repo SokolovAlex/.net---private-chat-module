@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Dal.Repositories.IRepositories
 {
-    public partial interface IUserRepository: IBaseRepository<User>
+    public partial interface IUserRepository
     {
         IEnumerable<UserModel> GetAllRecipientsFor(int id);
 
